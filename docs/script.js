@@ -9,6 +9,7 @@ window.onload = () => {
     const searchButton = document.getElementById("address-search");
     searchButton.addEventListener("click", () => { codeAddress() })
     serviceResultHeader = document.getElementById("service-result");
+
 }
 
 function initMap() {
@@ -344,7 +345,7 @@ function initMap() {
         strokeOpacity: 0.75,
         strokeWeight: 2,
         fillColor: "#FF0000",
-        fillOpacity: 0.25,
+        fillOpacity: 0.10,
         clickable: false,
     });
 
@@ -352,10 +353,10 @@ function initMap() {
     serviceAreaTier2 = new google.maps.Polygon({
         paths: t2ServiceAreaCoords,
         strokeColor: "#0000FF",
-        strokeOpacity: 0.70,
+        strokeOpacity: 0.75,
         strokeWeight: 2,
         fillColor: "#0000FF",
-        fillOpacity: 0.20,
+        fillOpacity: 0.10,
         clickable: false,
     });
 
@@ -370,7 +371,8 @@ function initAddressSearch() {
     const options = {
         types: ["address"],
         componentRestrictions: { country: "se" },
-        fields: ["address_components", "geometry", "icon", "name"],
+        locationBias: {lat: 55.593811584199614, lng: 13.031717090391876},
+        fields: ["address_components", "geometry", "name"],
     };
     const autocomplete = new google.maps.places.Autocomplete(input, options);
 
@@ -387,6 +389,7 @@ function codeAddress() {
             }
 
             marker = new google.maps.marker.AdvancedMarkerElement({
+                content: new google.maps.marker.PinElement({background: "#4285f4", glyphColor: "#1a73e8", borderColor: "#1a73e8"}).element,
                 map: map,
                 position: results[0].geometry.location
             });
@@ -400,16 +403,20 @@ function codeAddress() {
 }
 
 function evalMarkerLocation() {
-     //Check bounds
-     var isWithinServiceArea = google.maps.geometry.poly.containsLocation(marker.position, serviceAreaTier1);
-     if (isWithinServiceArea) {
-         serviceResultHeader.innerHTML = "Inside Red";
-     } else {
+    //Check bounds
+    var isWithinServiceArea = google.maps.geometry.poly.containsLocation(marker.position, serviceAreaTier1);
+    if (isWithinServiceArea) {
+        serviceResultHeader.innerHTML = "Inside Red";
+
+    } else {
         isWithinServiceArea = google.maps.geometry.poly.containsLocation(marker.position, serviceAreaTier2);
-        if(isWithinServiceArea) {
+
+        if (isWithinServiceArea) {
             serviceResultHeader.innerHTML = "Inside Blue";
+        } else {
+            serviceResultHeader.innerHTML = "Outside";
         }
-     }
+    }
 }
 
 
