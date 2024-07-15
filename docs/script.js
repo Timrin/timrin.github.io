@@ -3,13 +3,14 @@ var geocoder;
 var marker;
 var serviceAreaTier1;
 var serviceAreaTier2;
-var serviceResultHeader;
+var serviceResultAddress;
+var serviceResultArea;
 
 window.onload = () => {
     const searchButton = document.getElementById("address-search");
     searchButton.addEventListener("click", () => { codeAddress() })
-    serviceResultHeader = document.getElementById("service-result");
-
+    serviceResultAddress = document.getElementById("service-result-address");
+    serviceResultArea = document.getElementById("service-result-area");
 }
 
 function initMap() {
@@ -406,17 +407,23 @@ function evalMarkerLocation() {
     //Check bounds
     var isWithinServiceArea = google.maps.geometry.poly.containsLocation(marker.position, serviceAreaTier1);
     if (isWithinServiceArea) {
-        serviceResultHeader.innerHTML = "Inside Red";
+        displayServiceResult("Red");
 
     } else {
         isWithinServiceArea = google.maps.geometry.poly.containsLocation(marker.position, serviceAreaTier2);
 
         if (isWithinServiceArea) {
-            serviceResultHeader.innerHTML = "Inside Blue";
+            displayServiceResult("Blue");
         } else {
-            serviceResultHeader.innerHTML = "Outside";
+            displayServiceResult("Outside service area");
         }
     }
+}
+
+function displayServiceResult(serviceTier) {
+    serviceResultAddress.innerHTML = document.getElementById('address-input').value;
+    serviceResultArea.innerHTML = serviceTier;
+    document.getElementById("service-result-card").style.maxHeight = "300px";
 }
 
 

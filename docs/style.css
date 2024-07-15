@@ -1,7 +1,74 @@
+:root {
+    --md-sys-color-primary: #6750a4;
+    --md-sys-color-primary-container: #eaddff;
+    --md-sys-color-secondary: #625b71;
+    --md-sys-color-secondary-container: #e8def8;
+    --md-sys-color-tertiary: #7d5260;
+    --md-sys-color-tertiary-container: #ffd8e4;
+    --md-sys-color-error: #b3261e;
+    --md-sys-color-error-container: #f9dedc;
+    --md-sys-color-background: #fef7ff;
+    --md-sys-color-surface: #fef7ff;
+    --md-sys-color-surface-bright: #fef7ff;
+    --md-sys-color-surface-dim: #ded8e1;
+    --md-sys-color-surface-container: #f3edf7;
+    --md-sys-color-surface-container-highest: #e6e0e9;
+    --md-sys-color-surface-container-high: #ece6f0;
+    --md-sys-color-surface-container-low: #f7f2fa;
+    --md-sys-color-surface-container-lowest: #fff;
+    --md-sys-color-outline: #79747e;
+    --md-sys-color-outline-variant: #cac4d0;
+}
+
+body {
+    background-color: var(--md-sys-color-background);
+    font-family: 'Roboto', 'Arial', 'sans-serif';
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #map {
     height: 300px;
+    border-radius: 24px;
 }
 
 #address-input {
-    width: 250px;
+    width: 100%;
+}
+
+.section-header {
+    width: 94%;
+    max-width: 1000px;
+}
+
+.card {
+    width: 96%;
+    max-width: 1000px;
+    margin-bottom: 20px;
+}
+
+.card-style-secondary {
+    
+    border-radius: 24px;
+    background-color: var(--md-sys-color-surface-container);
+}
+
+.card-content {
+    padding: 28px;
+}
+
+.card-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+#service-result-card {
+    max-height: 0px;
+    transition: max-height 0.2s ease-in;
 }

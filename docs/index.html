@@ -6,6 +6,23 @@
 
 	<meta charset="UTF-8">
 
+	<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+	<script type="importmap">
+    {
+      "imports": {
+        "@material/web/": "https://esm.run/@material/web/"
+      }
+    }
+  </script>
+	<script type="module">
+		import '@material/web/all.js';
+		import { styles as typescaleStyles } from '@material/web/typography/md-typescale-styles.js';
+
+		document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+	</script>
+
 	<link rel="stylesheet" type="text/css" href="style.css">
 
 	<script type="text/javascript" src="script.js"></script>
@@ -14,11 +31,48 @@
 
 <body>
 	<div id="container">
-		<div id="map"></div>
+		<div class="card">
+			<div class="card-content">
+				<h1>We do Pickup and Delivery!</h2>
+					<h3>Enter your address below to get started</h3>
+			</div>
+		</div>
 
-		<input id="address-input" type="text">
-		<button id="address-search">Search</button>
-		<h3 id="service-result"></h3>
+		<div class="card card-style-secondary">
+			<div id="map"></div>
+
+			<div class="card-content">
+				<div class="card-row">
+					<md-filled-text-field id="address-input" type="search" name="q" label="Pickup Address" value=""
+						placeholder="Lokgatan 1, Malmö, Sweden" required>
+
+					</md-filled-text-field>
+
+					<md-filled-button id="address-search">
+						<md-icon slot="icon">location_on</md-icon>
+						Submit
+					</md-filled-button>
+				</div>
+			</div>
+		</div>
+
+		<div class="card card-style-secondary" id="service-result-card">
+			<div class="card-content">
+				<div class="card-row">
+					<md-icon>location_on</md-icon>
+					<h3 id="service-result-address"></h3>
+				</div>
+				<p>Service Area: <span id="service-result-area">Blue</span></p>
+			</div>
+		</div>
+
+
+		<div class="card card-style-secondary">
+			<div class="card-content">
+				<h2>Are you located outside our service area?</h2>
+				<p>Contact us to see if we can still accommodate you!</p>
+			</div>
+		</div>
 	</div><!--Closing #container-->
 
 	<script
